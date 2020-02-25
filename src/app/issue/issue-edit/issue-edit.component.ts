@@ -14,6 +14,7 @@ export class IssueEditComponent implements OnInit {
 
   constructor(private issueService: IssueService, private fb: FormBuilder) {}
 
+
   ngOnInit() {
     this.initForm();
   }
@@ -37,6 +38,10 @@ export class IssueEditComponent implements OnInit {
       // TODO create getIssue in service
     }
   }
+
+  // convenience getter for easy access to form fields
+  get f() { return this.issueForm.controls; }
+  get fAdd() { return this.f.createFields['controls']; }
 
   onSubmit() {
     if (this.isEditMode) {

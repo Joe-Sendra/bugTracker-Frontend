@@ -1,6 +1,6 @@
 <div class="container">
   <h2>Add/Edit Issue</h2>
-  <form [formGroup]="issueForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="issueForm" (ngSubmit)="onSubmit()" class="needs-validation">
     <div class="form-group">
       <input
         type="text"
@@ -20,8 +20,12 @@
           formControlName="project"
           class="form-control"
           placeholder="project"
+          [ngClass]="{ 'is-invalid': fAdd.project.touched && fAdd.project.errors }"
           #project
         />
+        <div *ngIf="fAdd.project.touched && fAdd.project.errors" class="invalid-feedback">
+          <div *ngIf="fAdd.project.errors.required">Project name is required</div>
+        </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-3">
@@ -70,8 +74,12 @@
           formControlName="summary"
           class="form-control"
           placeholder="summary"
+          [ngClass]="{ 'is-invalid': fAdd.summary.touched && fAdd.summary.errors }"
           #summary
         />
+        <div *ngIf="fAdd.summary.touched && fAdd.summary.errors" class="invalid-feedback">
+          <div *ngIf="fAdd.summary.errors.required">Summary is required</div>
+        </div>
       </div>
       <div class="form-group">
         <label for="description">Description</label>
@@ -107,7 +115,7 @@
       />
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-success">Add Issue</button>
+      <button type="submit" class="btn btn-success" [disabled]="!issueForm.valid">Add Issue</button>
     </div>
   </form>
 </div>
