@@ -10,6 +10,10 @@ import { IssueService } from '../issue.service';
 export class IssueEditComponent implements OnInit {
 
   issueForm: FormGroup;
+  updateIssue = {
+    isSuccess: null,
+    message: ''
+  };
   isEditMode = false;
 
   constructor(private issueService: IssueService, private fb: FormBuilder) {}
@@ -59,11 +63,17 @@ export class IssueEditComponent implements OnInit {
       // Add a new issue
       const newIssue = this.issueForm.getRawValue().createFields;
       this.issueService.addIssue(newIssue).subscribe(issue => {
-        console.log(issue);
+        if (issue._id) {
+          this.updateIssue.isSuccess = true;
+          this.updateIssue.message = 'Issue was successfully added!';
+          this.issueForm.reset();
+          this.initForm();
+        }
       },
       error => {
         if (error.status === 422) {
-          console.log('We know about this error😋');
+          this.updateIssue.isSuccess = false;
+          this.updateIssue.message = 'There was a problem adding this issue';
         } else {
           console.log('TODO send error message to screen', error);
         }

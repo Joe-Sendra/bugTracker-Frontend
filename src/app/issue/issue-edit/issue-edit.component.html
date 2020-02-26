@@ -1,6 +1,13 @@
 <div class="container">
   <h2>Add/Edit Issue</h2>
-  <form [formGroup]="issueForm" (ngSubmit)="onSubmit()" class="needs-validation">
+  <app-alert
+    [type]="'Large'"
+    [isSuccess]="updateIssue.isSuccess"
+    [message]="updateIssue.message"></app-alert>
+  <form
+    [formGroup]="issueForm"
+    (ngSubmit)="onSubmit()"
+    class="needs-validation">
     <div class="form-group">
       <input
         type="text"

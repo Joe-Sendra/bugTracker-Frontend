@@ -1,0 +1,8 @@
+<span *ngIf="type === 'Small'" [ngClass]="isSuccess ? null : 'isError'">{{ message }}</span>
+
+<div *ngIf="type === 'Large' && isSuccess" class="alert alert-success" role="alert">
+  {{ message }}
+</div>
+<div *ngIf="type === 'Large' && !isSuccess && isSuccess != null" class="alert alert-danger" role="alert">
+  {{ message }}
+</div>
