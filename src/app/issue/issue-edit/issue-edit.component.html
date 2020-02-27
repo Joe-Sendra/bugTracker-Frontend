@@ -1,5 +1,6 @@
 <div class="container">
-  <h2>Add/Edit Issue</h2>
+  <h2 *ngIf="isEditMode">Edit Issue</h2>
+  <h2 *ngIf="!isEditMode">Add Issue</h2>
   <app-alert
     [type]="'Large'"
     [isSuccess]="updateIssue.isSuccess"
@@ -20,7 +21,8 @@
       />
     </div>
     <div formGroupName="createFields">
-      <div class="form-group">
+      <div class="form-group required">
+        <label class="control-label" for="project">Project</label>
         <input
           type="text"
           id="project"
@@ -35,7 +37,8 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-md-3">
+        <div class="form-group required col-md-3">
+          <label class="control-label" for="type">Type</label>
           <input
             type="text"
             id="type"
@@ -46,7 +49,8 @@
             #type
           />
         </div>
-        <div class="form-group col-md-5">
+        <div class="form-group required col-md-5">
+          <label class="control-label" for="status">Status</label>
           <select
             id="status"
             formControlName="status"
@@ -60,7 +64,8 @@
             <option value="Done">Done</option>
           </select>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group required col-md-4">
+          <label class="control-label" for="priority">Priority</label>
           <select
             id="priority"
             formControlName="priority"
@@ -74,7 +79,8 @@
           </select>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group required">
+        <label class="control-label" for="summary">Summary</label>
         <input
           type="text"
           id="summary"
@@ -122,7 +128,9 @@
       />
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-success" [disabled]="!issueForm.valid">Add Issue</button>
+      <button type="submit" class="btn btn-success" [disabled]="!issueForm.valid">
+        <span *ngIf="isEditMode">Save</span>
+        <span *ngIf="!isEditMode">Add Issue</span></button>
     </div>
   </form>
 </div>
